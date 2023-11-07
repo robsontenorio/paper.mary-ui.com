@@ -13,6 +13,9 @@ export default {
     theme: {
         extend: {},
     },
+    safelist: [{
+        pattern: /badge-/
+    }],
 
     // Add daisyUI
     plugins: [require("daisyui")]

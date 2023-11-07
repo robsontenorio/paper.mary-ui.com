@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Welcome::class);
+// Login
+Volt::route('/login', 'login')->name('login');
+
+//Logout
+Route::get('/logout', function () {
+    auth()->logout();
+
+    return redirect('/');
+});
+
+Volt::route('/', 'index');
+
+Route::middleware('auth')->group(function () {
+    Volt::route('/posts/create', 'posts.edit');
+    Volt::route('/posts/{post}/edit', 'posts.edit');
+});
+
+Volt::route('/posts/{post}', 'posts.show');
