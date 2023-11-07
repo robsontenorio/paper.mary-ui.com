@@ -36,8 +36,8 @@ new class extends Component {
         @if(auth()->user()?->is($post->author))
             <div>
                 @if(! $post->archived_at)
-                    <x-button label="Archive" wire:click="archive" icon="o-archive-box" class="text-error btn-sm btn-ghost" />
-                    <x-button label="Edit" link="/posts/{{ $post->id }}/edit" icon="o-pencil" class="text-primary btn-sm btn-ghost" />
+                    <x-button label="Archive" wire:click="archive" icon="o-archive-box" class="btn-sm btn-ghost" />
+                    <x-button label="Edit" link="/posts/{{ $post->id }}/edit" icon="o-pencil" class="btn-sm btn-ghost" />
                 @else
                     <x-button label="Unarchive" wire:click="unarchive" icon="o-archive-box" class="btn-sm btn-ghost" />
                 @endif
