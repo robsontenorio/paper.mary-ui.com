@@ -10,13 +10,13 @@ new class extends Component {
 
     public Post $post;
 
-    public function archive()
+    public function archive(): void
     {
         $this->post->update(['archived_at' => now()]);
         $this->warning('Post archived.');
     }
 
-    public function unarchive()
+    public function unarchive(): void
     {
         $this->post->update(['archived_at' => null]);
         $this->success('Post unarchived.');
@@ -24,16 +24,14 @@ new class extends Component {
 }; ?>
 
 <div>
-
     {{--  TITLE  --}}
     <div class="font-extrabold text-4xl"> {{ $post->title }} </div>
 
-    {{--  OPTIONS  --}}
+    {{--  OPTIONS: ARCHIVE/EDIT  --}}
     <div class="mt-3 flex flex-wrap gap-3 lg:gap-8 items-center justify-between">
-
         <livewire:categories.tag :category="$post->category" />
 
-        @if(auth()->user()?->is($post->author))
+        @if($post->author->isOwner())
             <div>
                 @if(! $post->archived_at)
                     <x-button label="Archive" wire:click="archive" icon="o-archive-box" class="btn-sm btn-ghost" />
@@ -49,37 +47,22 @@ new class extends Component {
 
     {{--  POST BODY  --}}
     <x-card class="leading-7 mb-10 border" separator shadow>
-        {!! nl2br($post->body) !!}
 
         {{--  TITLE --}}
-        <x-slot:title>
-            <div class="flex gap-2">
-                {{-- AVATAR --}}
-                <div>
-                    <div class="avatar">
-                        <div class="w-6 rounded-full">
-                            <img src="{{ $post->author->avatar }}" />
-                        </div>
-                    </div>
-                </div>
-                {{--  USERNAME  --}}
-                <div>
-                    <div class="flex items-center gap-3">
-                        <div class="text-sm">{{ $post->author->username }}</div>
-                        <div class="text-xs font-normal text-gray-500 tooltip" data-tip="{{ $post->created_at }}">
-                            {{ $post->created_at->diffForHumans() }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <x-slot:title class="flex gap-2 items-center">
+            <livewire:users.avatar :user="$post->author" />
+            <livewire:posts.timestamp :$post />
         </x-slot:title>
+
+        {{--   BODY  --}}
+        {!! nl2br($post->body) !!}
     </x-card>
 
-    {{--  ARCHIVE WARNING  --}}
+    {{--  ARCHIVED WARNING  --}}
     @if($post->archived_at)
         <x-alert title="This post was archived {{ $post->archived_at->diffForHumans() }}" icon="o-archive-box" class="alert-warning mb-10" />
     @endif
 
     {{--  COMMENTS --}}
-    <livewire:comments.index :post="$post" lazy wire:key="comments-{{ rand() }}" />
+    <livewire:comments.index :post="$post" wire:key="comments-{{ rand() }}" />
 </div>

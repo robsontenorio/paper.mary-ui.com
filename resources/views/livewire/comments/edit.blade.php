@@ -8,64 +8,34 @@ use Livewire\Volt\Component;
 new class extends Component {
     public Post $post;
 
-    public ?Comment $comment;
+    public Comment $comment;
 
     #[Rule('required|min:5')]
     public ?string $body;
 
-    public function mount(Post $post, ?Comment $comment)
+    public function mount(Comment $comment): void
     {
-        $this->comment = $comment->id ? $comment : new Comment();
-
-        $this->body = $comment?->body;
-        $this->post = $post;
+        $this->body = $comment->body;
     }
 
-    public function save()
+    // You should use authorization rules here!
+    public function save(): void
     {
-        // Update
-        if ($this->comment->id) {
-            $this->comment->update($this->validate());
-        }
-
-        // Create
-        if (! $this->comment->id) {
-            $this->comment->fill($this->validate());
-            $this->comment->author_id = auth()->user()->id;
-
-            $this->post->comments()->save($this->comment);
-            $this->post->touch('updated_at');
-
-            $this->comment = new Comment();
-        }
+        $this->comment->update($this->validate());
+        $this->post->touch('updated_at');
 
         $this->reset('body');
-        $this->dispatch('comment-done');
+        $this->dispatch('comment-edited');
     }
 }; ?>
 
 <div>
-    <div class="lg:flex gap-8 mt-10">
-        @if(! $comment?->id)
-            <div>
-                <div class="avatar">
-                    <div class="w-8 lg:w-16 rounded-full">
-                        <img src="{{ auth()->user()?->avatar }}" />
-                    </div>
-                </div>
-            </div>
-        @endif
+    <x-form wire:submit="save" class="flex-1" @keydown.meta.enter="$wire.save()">
+        <x-textarea placeholder="Reply..." wire:model="body" />
 
-        <x-form wire:submit="save" class="flex-1" @keydown.meta.enter="$wire.save()">
-            <x-textarea placeholder="Reply..." wire:model="body" />
-
-            <x-slot:actions>
-                @if($comment?->id)
-                    <x-button label="Cancel" wire:click="$dispatch('comment-done')" />
-                @endif
-
-                <x-button label="Reply" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="save" />
-            </x-slot:actions>
-        </x-form>
-    </div>
+        <x-slot:actions>
+            <x-button label="Cancel" wire:click="$dispatch('comment-edited')" />
+            <x-button label="Save" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="save" />
+        </x-slot:actions>
+    </x-form>
 </div>

@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'author_id');
     }
 
+    public function isOwner(): bool
+    {
+        return $this->is(auth()->user());
+    }
+
     protected function firstName(): Attribute
     {
         return Attribute::make(
