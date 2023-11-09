@@ -64,5 +64,5 @@ new class extends Component {
     @endif
 
     {{--  COMMENTS --}}
-    <livewire:comments.index :post="$post" wire:key="comments-{{ rand() }}" />
+    <livewire:comments.index :post="$post" />
 </div>

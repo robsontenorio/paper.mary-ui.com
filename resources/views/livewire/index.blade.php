@@ -90,9 +90,9 @@ new class extends Component {
                         <x-icon name="o-arrow-uturn-left" class="w-4 h-4" />
                         <span class="font-bold text-xs mr-3">{{ $post->latestComment?->author->username }} </span>
 
-                        <livewire:timestamp :dateTime="$post->latestComment?->created_at" />
+                        <livewire:timestamp :dateTime="$post->latestComment?->created_at" wire:key="time-{{ $post->id }}" />
                     @else
-                        <livewire:timestamp :dateTime="$post->updated_at" />
+                        <livewire:timestamp :dateTime="$post->updated_at" wire:key="time-{{  $post->id }}" />
                     @endif
 
                     @if($post->archived_at)

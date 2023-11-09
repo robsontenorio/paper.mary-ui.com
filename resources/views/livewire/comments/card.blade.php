@@ -3,18 +3,23 @@
 use App\Models\Comment;
 use App\Models\Post;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Rule;
 use Livewire\Volt\Component;
 
 new class extends Component {
+    public Post $post;
+
     public Comment $comment;
 
-    public ?Comment $commentEdit;
+    public bool $editing = false;
 
-    public Post $post;
+    #[Rule('required|min:5')]
+    public ?string $body;
 
     public function mount(Comment $comment): void
     {
         $this->post = $comment->post;
+        $this->body = $comment->body;
     }
 
     // You should use authorization rules here!
@@ -24,15 +29,13 @@ new class extends Component {
         $this->dispatch('comment-done');
     }
 
-    public function edit(Comment $comment): void
+    // You should use authorization rules here!
+    public function save(): void
     {
-        $this->commentEdit = $comment;
-    }
+        $this->comment->update($this->validate());
+        $this->post->touch('updated_at');
 
-    #[On('comment-edited')]
-    public function done(): void
-    {
-        $this->reset('commentEdit');
+        $this->editing = false;
         $this->dispatch('comment-done');
     }
 }; ?>
@@ -40,6 +43,8 @@ new class extends Component {
 <div>
     <x-card
         @class(["mt-5", "border border-primary/30" => $comment->author->isOwner()])
+        wire:loading.class="opacity-50 border-error"
+        wire:target="delete({{ $comment->id }})"
         shadow
         separator
     >
@@ -56,7 +61,7 @@ new class extends Component {
                     <x-slot:trigger>
                         <x-button icon="o-ellipsis-vertical" class="btn-sm btn-ghost btn-circle" />
                     </x-slot:trigger>
-                    <x-menu-item title="Edit" icon="o-pencil" wire:click="edit({{ $comment->id  }})" />
+                    <x-menu-item title="Edit" icon="o-pencil" @click="$wire.editing = true" />
                     <x-menu-item title="Remove" icon="o-trash" wire:click="delete({{ $comment->id  }})" class="text-error" />
                 </x-dropdown>
             @endif
@@ -64,11 +69,21 @@ new class extends Component {
 
         {{-- COMMENT BODY --}}
         <div class="leading-7">
-            @if($commentEdit?->is($comment))
-                <livewire:comments.edit :post="$comment->post" :comment="$comment" wire:key="comment-edit-{{ $comment->id }}" />
-            @else
+
+            <div x-show="!$wire.editing">
                 {!!  nl2br($comment->body) !!}
-            @endif
+            </div>
+
+            {{-- EDIT FORM --}}
+            <x-form x-show="$wire.editing" wire:submit="save" class="flex-1" @keydown.meta.enter="$wire.save()">
+                <x-textarea placeholder="Reply..." wire:model="body" />
+
+                <x-slot:actions>
+                    <x-button label="Cancel" wire:click="$wire.editing = false" />
+                    <x-button label="Save" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="save" />
+                </x-slot:actions>
+            </x-form>
+
         </div>
     </x-card>
 </div>
