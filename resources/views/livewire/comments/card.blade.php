@@ -2,11 +2,14 @@
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Traits\HasCssClassAttribute;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Volt\Component;
 
 new class extends Component {
+    use HasCssClassAttribute;
+
     public Post $post;
 
     public Comment $comment;
@@ -36,15 +39,15 @@ new class extends Component {
         $this->post->touch('updated_at');
 
         $this->editing = false;
-        $this->dispatch('comment-done');
     }
 }; ?>
 
 <div>
+
     <x-card
-        @class(["mt-5", "border border-primary/30" => $comment->author->isOwner()])
-        wire:loading.class="opacity-50 border-error"
-        wire:target="delete({{ $comment->id }})"
+        @class([$class, "border border-primary/30" => $comment->author->isMyself()])
+        wire:loading.class="opacity-60 border-dashed !border-primary"
+        wire:target="delete,save"
         shadow
         separator
     >
@@ -56,7 +59,7 @@ new class extends Component {
 
         {{-- MENU --}}
         <x-slot:menu>
-            @if(! $post->archived_at && $comment->author->isOwner())
+            @if(! $post->archived_at && $comment->author->isMyself())
                 <x-dropdown right>
                     <x-slot:trigger>
                         <x-button icon="o-ellipsis-vertical" class="btn-sm btn-ghost btn-circle" />
@@ -67,9 +70,10 @@ new class extends Component {
             @endif
         </x-slot:menu>
 
-        {{-- COMMENT BODY --}}
+        {{-- COMMENT --}}
         <div class="leading-7">
 
+            {{--  BODY  --}}
             <div x-show="!$wire.editing">
                 {!!  nl2br($comment->body) !!}
             </div>
@@ -79,7 +83,7 @@ new class extends Component {
                 <x-textarea placeholder="Reply..." wire:model="body" />
 
                 <x-slot:actions>
-                    <x-button label="Cancel" wire:click="$wire.editing = false" />
+                    <x-button label="Cancel" @click="$wire.editing = false" />
                     <x-button label="Save" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="save" />
                 </x-slot:actions>
             </x-form>

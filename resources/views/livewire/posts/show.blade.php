@@ -31,7 +31,7 @@ new class extends Component {
     <div class="mt-3 flex flex-wrap gap-3 lg:gap-8 items-center justify-between">
         <livewire:categories.tag :category="$post->category" />
 
-        @if($post->author->isOwner())
+        @if($post->author->isMyself())
             <div>
                 @if(! $post->archived_at)
                     <x-button label="Archive" wire:click="archive" icon="o-archive-box" class="btn-sm btn-ghost" />
@@ -64,5 +64,5 @@ new class extends Component {
     @endif
 
     {{--  COMMENTS --}}
-    <livewire:comments.index :post="$post" />
+    <livewire:comments.index :post="$post" wire:key="comments-{{ rand() }}" />
 </div>

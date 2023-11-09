@@ -11,9 +11,6 @@ use Livewire\Volt\Component;
 new class extends Component {
     public Post $post;
 
-    #[Rule('required|min:5')]
-    public string $body = '';
-
     public function comments(): Collection
     {
         return Comment::query()
@@ -26,9 +23,10 @@ new class extends Component {
     #[On('comment-done')]
     public function done(): void
     {
-        $this->resetExcept('post');
+        // None. Just refresh the list from child events when necessary
     }
 
+    // For lazy loading
     public function placeholder(): string
     {
         return <<<'HTML'
@@ -54,7 +52,7 @@ new class extends Component {
 
     {{-- COMMENT LIST --}}
     @foreach($comments as $comment)
-        <livewire:comments.card :$comment wire:key="comment-{{ $comment->id }}" />
+        <livewire:comments.card :$comment wire:key="comment-{{ $comment->id }}" class="mt-5" />
     @endforeach
 
     {{-- REPLY --}}
