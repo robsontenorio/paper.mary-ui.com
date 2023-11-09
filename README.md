@@ -1,4 +1,4 @@
-<p align="center"><img width="200" src="public/paper2.png"></p>
+<p align="center"><img width="300" src="public/paper2.png"></p>
 <p align="center"><img width="50" src="public/mary.png"></p>
 
 ## Introduction
