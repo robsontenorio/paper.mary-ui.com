@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This is the source code of demo [paper.mary-ui.com](https://paper.mary-ui.com) buit with [MaryUI](https://mary-ui.com).
+This is the source code of demo [paper.mary-ui.com](https://paper.mary-ui.com) built with [MaryUI](https://mary-ui.com).
 
 ## Sponsor
 
