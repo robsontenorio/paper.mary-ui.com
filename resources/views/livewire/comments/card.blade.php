@@ -45,8 +45,8 @@ new class extends Component {
     >
         {{--  TITLE --}}
         <x-slot:title class="flex gap-2 items-center">
-            <livewire:users.avatar :user="$post->author" />
-            <livewire:posts.timestamp :$post />
+            <livewire:users.avatar :user="$comment->author" />
+            <livewire:timestamp :dateTime="$comment->created_at" />
         </x-slot:title>
 
         {{-- MENU --}}

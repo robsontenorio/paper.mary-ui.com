@@ -9,13 +9,26 @@
 </head>
 <body class="min-h-screen font-sans antialiased bg-base-200/50">
 
+<x-nav sticky class="lg:hidden">
+    <x-slot:brand>
+        {{-- Drawer toggle for "main-drawer" --}}
+        <label for="main-drawer" class="lg:hidden mr-3">
+            <x-icon name="o-bars-3" class="cursor-pointer" />
+        </label>
+
+        <livewire:paper-brand />
+    </x-slot:brand>
+</x-nav>
+
 <x-main>
-    <x-slot:sidebar>
-        <div class="font-extrabold text-4xl text-primary ml-5 mt-9 mb-8">
-            <a href="/" wire:navigate>
-                <x-icon name="o-paper-airplane" class="w-8 h-8" />
-                paper
-            </a>
+    <x-slot:sidebar drawer="main-drawer">
+        <div class="ml-5 my-8">
+            <span class="font-extrabold text-4xl text-primary">
+                <a href="/" wire:navigate>
+                    <x-icon name="o-paper-airplane" class="w-8 h-8" />
+                    paper
+                </a>
+            </span>
         </div>
 
         <div class="mx-3">

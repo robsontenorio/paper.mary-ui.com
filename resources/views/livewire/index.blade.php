@@ -64,7 +64,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <x-header separator progress-indicator>
+    <x-header size="text-inherit" separator progress-indicator>
         {{-- SEARCH --}}
         <x-slot:title>
             <x-input placeholder="Search ..." wire:model.live.debounce="search" icon="o-magnifying-glass">
@@ -80,7 +80,7 @@ new class extends Component {
         </x-slot:actions>
     </x-header>
 
-    <x-card class="mt-10" shadow>
+    <x-card class="mt-10 !p-0 sm:!p-5" shadow>
         {{-- POSTS LIST --}}
         @forelse($posts as $post)
             <x-list-item :item="$post" value="title" sub-value="body" avatar="author.avatar" link="/posts/{{ $post->id }}">
@@ -88,8 +88,11 @@ new class extends Component {
                 <x-slot:subValue>
                     @if($post->latestComment)
                         <x-icon name="o-arrow-uturn-left" class="w-4 h-4" />
-                        <span class="font-bold mr-3">{{ $post->latestComment?->author->username }} </span>
-                        {{ $post->latestComment?->created_at->diffForHumans() }}
+                        <span class="font-bold text-xs mr-3">{{ $post->latestComment?->author->username }} </span>
+
+                        <livewire:timestamp :dateTime="$post->latestComment?->created_at" />
+                    @else
+                        <livewire:timestamp :dateTime="$post->updated_at" />
                     @endif
 
                     @if($post->archived_at)

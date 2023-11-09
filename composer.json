@@ -12,7 +12,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.1",
         "livewire/volt": "^1.4",
-        "robsontenorio/mary": "dev-header-classes"
+        "robsontenorio/mary": "dev-choices-rework"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
