@@ -85,30 +85,23 @@ new class extends Component {
         @forelse($posts as $post)
             <x-list-item :item="$post" value="title" sub-value="body" avatar="author.avatar" link="/posts/{{ $post->id }}">
                 {{--  SUB VALUE  --}}
-                <x-slot:subValue>
+                <x-slot:subValue class="flex items-center gap-3 pt-0.5">
                     @if($post->latestComment)
-                        <x-icon name="o-arrow-uturn-left" class="w-4 h-4" />
-                        <span class="font-bold text-xs mr-3">{{ $post->latestComment?->author->username }} </span>
-
+                        <x-icon name="o-arrow-uturn-left" class="w-4 h-4 font-bold" label="{{ $post->latestComment?->author->username }}" />
                         <livewire:timestamp :dateTime="$post->latestComment?->created_at" wire:key="time-{{ $post->id }}" />
                     @else
                         <livewire:timestamp :dateTime="$post->updated_at" wire:key="time-{{  $post->id }}" />
                     @endif
 
                     @if($post->archived_at)
-                        <x-icon name="o-archive-box" class="w-4 h-4 ml-5" />
-                        <span class="text-xs">Archived</span>
+                        <x-icon name="o-archive-box" class="w-4 h-4" label="Archived" />
                     @endif
                 </x-slot:subValue>
 
                 {{-- ACTIONS --}}
                 <x-slot:actions>
-                    <livewire:categories.tag :category="$post->category" wire:key="tag-{{ $post->id }}-{{ $post->category_id }}" />
-
-                    <div class="text-sm">
-                        {{ $post->comments_count }}
-                        <x-icon name="s-chat-bubble-left" class="text-gray-500" />
-                    </div>
+                    <livewire:categories.tag :category="$post->category" class="hidden lg:block" wire:key="tag-{{ $post->id }}-{{ $post->category_id }}" />
+                    <x-icon name="o-chat-bubble-left" class="w-4 h-4 text-sm" label="{{ $post->comments_count }}" />
                 </x-slot:actions>
             </x-list-item>
         @empty

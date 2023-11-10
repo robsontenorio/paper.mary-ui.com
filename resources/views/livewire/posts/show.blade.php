@@ -49,8 +49,8 @@ new class extends Component {
     <x-card class="leading-7 mb-10 border" separator shadow>
 
         {{--  TITLE --}}
-        <x-slot:title class="flex gap-2 items-center">
-            <livewire:users.avatar :user="$post->author" />
+        <x-slot:title class="!text-sm flex gap-2 items-center">
+            <x-avatar :image="$post->author->avatar" :title="$post->author->username" />
             <livewire:timestamp :dateTime="$post->created_at" />
         </x-slot:title>
 

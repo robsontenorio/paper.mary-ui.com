@@ -35,7 +35,7 @@
         <div class="mx-3">
             {{-- User --}}
             @if($user = auth()->user())
-                <x-list-item :item="$user" value="username" link="/users/{{ $user->username }}" no-separator>
+                <x-list-item :item="$user" value="username" link="/profile" no-separator>
                     <x-slot:actions>
                         <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" link="/logout" tooltip-left="logoff" />
                     </x-slot:actions>
