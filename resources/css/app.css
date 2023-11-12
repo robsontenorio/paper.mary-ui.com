@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+hr {
+    @apply dark:border-b-0 dark:border-t-gray-700
+}

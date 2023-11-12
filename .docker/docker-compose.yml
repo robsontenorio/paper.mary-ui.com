@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+    ######## APP ########
+    demo-mary-app:
+        build:
+            context: ..
+            dockerfile: .docker/Dockerfile
+            target: local
+        environment:
+            - CONTAINER_ROLE=APP
+        volumes:
+            - ../:/var/www/app:cached
+        ports:
+            - "8016:8080"
+            - "5176:5176"
