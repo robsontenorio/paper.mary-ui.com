@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
     ######## APP ########
-    demo-mary-app:
+    paper-app:
         build:
             context: ..
             dockerfile: .docker/Dockerfile
