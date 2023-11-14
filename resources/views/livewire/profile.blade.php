@@ -47,8 +47,8 @@ new class extends Component {
 
 <div>
     {{-- HEADER --}}
-    <x-avatar :image="$user->avatar" class="!w-24 ring ring-primary ring-offset-base-100 ring-offset-2">
-        <x-slot:title class="text-3xl pl-2">
+    <x-avatar :image="$user->avatar" class="!w-20 ring ring-primary ring-offset-base-100 ring-offset-2">
+        <x-slot:title class="text-2xl !font-black pl-2">
             {{ $user->username }}
         </x-slot:title>
         <x-slot:subtitle class="text-neutral flex flex-col gap-2 mt-2 pl-2">
@@ -60,7 +60,7 @@ new class extends Component {
     {{--  TABS  --}}
     <x-tabs wire:model.live="selectedTab" class="mt-14">
         {{--  POSTS  --}}
-        <x-tab name="posts-tab" label="POSTS" icon="o-paper-airplane">
+        <x-tab name="posts-tab" label="Posts" icon="o-paper-airplane">
             <x-card class="!p-0 sm:!p-2">
                 @foreach($posts as $post)
                     <x-list-item :item="$post" value="title" avatar="author.avatar" link="/posts/{{ $post->id }}">
@@ -81,7 +81,7 @@ new class extends Component {
         </x-tab>
 
         {{-- COMMENTS --}}
-        <x-tab name="comments-tab" label="COMMENTS" icon="o-chat-bubble-left">
+        <x-tab name="comments-tab" label="Comments" icon="o-chat-bubble-left">
             <x-card class="!p-0 sm:!p-2">
                 @foreach($comments as $comment)
                     <x-list-item
