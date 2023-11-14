@@ -16,6 +16,8 @@ new class extends Component {
 
         Auth::login($user);
 
+        request()->session()->regenerate();
+
         return redirect()->intended($this->redirect_url);
     }
 }; ?>

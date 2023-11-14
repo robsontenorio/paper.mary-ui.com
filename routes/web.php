@@ -20,6 +20,8 @@ Volt::route('/login', 'login')->name('login');
 //Logout
 Route::get('/logout', function () {
     auth()->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
 
     return redirect('/');
 });
