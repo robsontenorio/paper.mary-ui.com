@@ -28,14 +28,9 @@
 </x-nav>
 
 <x-main>
-    <x-slot:sidebar drawer="main-drawer">
+    <x-slot:sidebar drawer="main-drawer" class="bg-base-200 lg:bg-transparent">
         <div class="ml-5 my-8">
-            <span class="font-extrabold text-4xl text-primary">
-                <a href="/" wire:navigate>
-                    <x-icon name="o-paper-airplane" class="w-8 h-8" />
-                    paper
-                </a>
-            </span>
+            <livewire:paper-brand />
         </div>
 
         <div class="mx-3">
