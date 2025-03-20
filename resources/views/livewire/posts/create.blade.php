@@ -47,20 +47,20 @@ new class extends Component {
 <div>
     <x-header title="Create Post" separator />
 
-    <div class="grid lg:grid-cols-4 gap-10">
-        <x-form wire:submit="save" class="col-span-3">
+    <div class="grid lg:grid-cols-12 gap-10">
+        <x-form wire:submit="save" class="col-span-7">
             <x-input label="Title" wire:model="title" />
 
             <x-select label="Category" wire:model="category_id" placeholder="Select a category" :options="$categories" />
 
-            <x-textarea label="Body" wire:model="body" rows="5" @keydown.meta.enter="$wire.save()" />
+            <x-textarea label="Body" wire:model="body" rows="10" @keydown.meta.enter="$wire.save()" />
 
             <x-slot:actions>
                 <x-button label="Cancel" link="/" />
                 <x-button label="Create" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="save" />
             </x-slot:actions>
         </x-form>
-        <div class="col-span-1">
+        <div class="col-span-5">
             <img src="/create-post.png" width="400" />
         </div>
     </div>

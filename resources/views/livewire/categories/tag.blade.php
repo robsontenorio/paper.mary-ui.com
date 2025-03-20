@@ -11,5 +11,5 @@ new class extends Component {
 }; ?>
 
 <span>
-    <x-badge :value="$category->name" class="badge-outline {{ $class }} {{ $category->color }}" />
+    <x-badge :value="$category->name" class="badge-sm badge-soft {{ $class }} {{ $category->color }}" />
 </span>

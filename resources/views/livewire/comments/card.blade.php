@@ -70,10 +70,10 @@ new class extends Component {
         </x-slot:menu>
 
         {{-- COMMENT --}}
-        <div class="leading-7">
+        <div class="text-sm/7">
             {{--  BODY  --}}
             <div x-show="!$wire.editing">
-                {!!  nl2br($comment->body) !!}
+                {!! nl2br(e($comment->body)) !!}
             </div>
 
             {{-- EDIT FORM --}}

@@ -48,10 +48,10 @@ new class extends Component {
 } ?>
 
 <div>
-    <x-header title="{{ $post->id ? 'Edit' : 'Create' }} Post" separator />
+    <x-header title="Edit Post" separator />
 
-    <div class="grid lg:grid-cols-4 gap-10">
-        <x-form wire:submit="save" class="col-span-3">
+    <div class="grid lg:grid-cols-12 gap-10">
+        <x-form wire:submit="save" class="col-span-7">
             <x-input label="Title" wire:model="title" />
 
             <x-select label="Category" wire:model="category_id" placeholder="Select a category" :options="$categories" />
@@ -63,7 +63,7 @@ new class extends Component {
                 <x-button label="Update" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="save" />
             </x-slot:actions>
         </x-form>
-        <div class="col-span-1">
+        <div class="col-span-5">
             <img src="/edit-post.png" width="400" />
         </div>
     </div>

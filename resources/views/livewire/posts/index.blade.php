@@ -64,23 +64,17 @@ new class extends Component {
 }; ?>
 
 <div>
-    <x-header title="Posts" />
-    
-    <x-header size="text-inherit" separator progress-indicator>
-        {{-- SEARCH --}}
-        <x-slot:title>
-            <x-input placeholder="Search ..." wire:model.live.debounce="search" icon="o-magnifying-glass">
-                <x-slot:prepend>
-                    <x-select wire:model.live="category_id" :options="$categories" placeholder="All" placeholder-value="0" class="rounded-r-none bg-primary/5" icon="o-tag" />
-                </x-slot:prepend>
-            </x-input>
-        </x-slot:title>
+    <x-header title="Posts" separator progress-indicator />
 
-        {{-- SORT --}}
-        <x-slot:actions>
-            <x-radio wire:model.live="sort" :options="$sorts" class="text-sm" />
-        </x-slot:actions>
-    </x-header>
+    <div class="grid gap-3 sm:flex sm:justify-between">
+        <x-input placeholder="Search ..." wire:model.live.debounce="search" icon="o-magnifying-glass">
+            <x-slot:prepend>
+                <x-select wire:model.live="category_id" :options="$categories" placeholder="All" placeholder-value="0" class="join-item !min-w-30" icon="o-tag" />
+            </x-slot:prepend>
+        </x-input>
+
+        <x-group wire:model.live="sort" :options="$sorts" />
+    </div>
 
     <x-card class="mt-10 !p-0 sm:!p-2" shadow>
         {{-- POSTS LIST --}}

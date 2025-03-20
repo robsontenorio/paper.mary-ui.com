@@ -1,14 +1,15 @@
 <?php
 
+use App\Traits\HasCssClassAttribute;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    //
+    use HasCssClassAttribute;
 }; ?>
 
-<span class="font-extrabold text-4xl text-primary">
+<div class="font-bold text-3xl text-primary sm:ps-4 {{ $class }}">
     <a href="/" wire:navigate>
-        <x-icon name="o-paper-airplane" class="w-8 h-8" />
+        <x-icon name="o-paper-airplane" class="w-7 h-7" />
         paper
     </a>
-</span>
+</div>

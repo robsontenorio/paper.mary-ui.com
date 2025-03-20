@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
     ######## APP ########
     paper-app:
@@ -11,7 +9,6 @@ services:
             - CONTAINER_ROLE=APP
         volumes:
             - ../:/var/www/app:cached
-            - /Users/robsontenorio/dev/mary-ui.com/packages/mary:/var/www/app/packages/mary:cached
         ports:
             - "8016:8080"
             - "5176:5176"

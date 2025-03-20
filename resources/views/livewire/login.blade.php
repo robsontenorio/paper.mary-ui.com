@@ -27,8 +27,8 @@ new class extends Component {
         <img src="/login.png" width="200" class="mx-auto" />
 
         <x-form wire:submit="login">
-            <x-input label="E-mail" value="random@random.com" icon="o-envelope" inline />
-            <x-input label="Password" value="random" type="password" icon="o-key" inline />
+            <x-input label="E-mail" value="random@random.com" icon="o-envelope" />
+            <x-input label="Password" value="random" type="password" icon="o-key" />
 
             <x-slot:actions>
                 <x-button label="Login" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="login" />
