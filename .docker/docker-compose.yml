@@ -1,14 +1,11 @@
 services:
-    ######## APP ########
-    paper-app:
+    paper:
         build:
             context: ..
             dockerfile: .docker/Dockerfile
             target: local
-        environment:
-            - CONTAINER_ROLE=APP
         volumes:
             - ../:/var/www/app:cached
         ports:
-            - "8016:8080"
-            - "5176:5176"
+            - 8016:8080
+            - 5176:5176

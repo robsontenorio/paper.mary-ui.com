@@ -2,15 +2,10 @@
 
 echo '------ Starting deploy tasks  ------'
 
-cp .env.example .env
-composer install --prefer-dist --no-interaction --no-progress --ansi
-
-yarn install
-yarn build
-
-# Do not this for production.
-# We do it here because it is a demo and we refresh the database on each deploy
 touch database/database.sqlite
+
+# DO NOT the database production.
+# We do it here because it is a demo and we refresh the database on every deploy
 php artisan migrate:fresh --seed --force
 
 php artisan storage:link
