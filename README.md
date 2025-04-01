@@ -1,9 +1,8 @@
-<p align="center"><img width="300" src="public/paper.png"></p>
+<p align="center"><img width="200" src="public/paper.png"></p>
 
 ## Introduction
 
-Made with love using Laravel, Livewire Volt and maryUI.  
-This is the source code of demo [paper.mary-ui.com](https://paper.mary-ui.com) built with [MaryUI](https://mary-ui.com).
+This is the source code of  [paper.mary-ui.com](https://paper.mary-ui.com) built with [maryUI](https://mary-ui.com).
 
 ## All demos
 

@@ -40,7 +40,7 @@
                 @if($user = auth()->user())
                     <x-menu-separator />
 
-                    <x-list-item :item="$user" no-separator no-hover class="-mx-2 !-my-2">
+                    <x-list-item :item="$user" sub-value="email" no-separator no-hover class="-mx-2 !-my-2">
                         <x-slot:actions>
                             <x-button icon="o-power" class="btn-circle btn-ghost btn-sm" tooltip-left="logoff" no-wire-navigate link="/logout" />
                         </x-slot:actions>
@@ -59,7 +59,7 @@
 
             <div class="flex mt-10">
                 <x-button label="Source code" icon="o-code-bracket" link="https://github.com/robsontenorio/paper.mary-ui.com" class="btn-ghost" external />
-                <x-button label="Built with MaryUI" icon="o-heart" link="https://mary-ui.com" class="btn-ghost !text-pink-500" external />
+                <x-button label="Built with maryUI" icon="o-heart" link="https://mary-ui.com" class="btn-ghost !text-pink-500" external />
             </div>
         </x-slot:content>
     </x-main>

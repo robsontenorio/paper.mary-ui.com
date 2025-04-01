@@ -14,7 +14,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
         "livewire/volt": "^1.7",
-        "robsontenorio/mary": "V2.x-dev"
+        "robsontenorio/mary": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -41,13 +41,12 @@
     "scripts": {
         "start": [
             "Composer\\Config::disableProcessTimeout",
-            "touch database/database.sqlite",
             "composer install",
             "php artisan key:generate",
-            "php artisan storage:link",
+            "touch database/database.sqlite",
             "php artisan migrate:fresh --seed",
-            "php artisan cache:clear",
-            "php artisan view:clear",
+            "php artisan optimize:clear",
+            "php artisan storage:link",
             "rm -rf public/build",
             "yarn install",
             "yarn dev"

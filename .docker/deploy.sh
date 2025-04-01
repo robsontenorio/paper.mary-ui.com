@@ -15,9 +15,7 @@ touch database/database.sqlite
 php artisan migrate:fresh --seed --force
 
 php artisan storage:link
-php artisan config:cache
-php artisan view:cache
-php artisan route:cache
+php artisan optimize
 php artisan icons:cache
 
 echo '------ Deploy completed ------'
