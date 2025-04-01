@@ -1,1 +1,1 @@
-// Nothing here
+import './bootstrap';

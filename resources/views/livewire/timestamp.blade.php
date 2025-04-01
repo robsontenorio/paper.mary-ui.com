@@ -7,7 +7,7 @@ new class extends Component {
     public DateTime $dateTime;
 }; ?>
 
-<div class="text-xs font-normal text-gray-500 tooltip" data-tip="{{ $dateTime }}">
+<div class="text-xs font-normal text-base-content/60 tooltip" data-tip="{{ $dateTime }}">
     {{ $dateTime->diffForHumans() }}
 </div>
 

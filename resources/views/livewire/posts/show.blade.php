@@ -25,28 +25,27 @@ new class extends Component {
 
 <div>
     {{--  TITLE  --}}
-    <div class="font-extrabold text-4xl"> {{ $post->title }} </div>
+    <x-header :title="$post->title" separator>
+        <x-slot:actions>
+            @if($post->author->isMyself())
+                <div>
+                    @if(! $post->archived_at)
+                        <x-button label="Archive" wire:click="archive" icon="o-archive-box" class="btn-sm btn-ghost" responsive />
+                        <x-button label="Edit" link="/posts/{{ $post->id }}/edit" icon="o-pencil-square" class="btn-sm btn-ghost" responsive />
+                    @else
+                        <x-button label="Unarchive" wire:click="unarchive" icon="o-archive-box" class="btn-sm btn-ghost" responsive />
+                    @endif
+                </div>
+            @endif
+        </x-slot:actions>
+    </x-header>
 
-    {{--  OPTIONS: ARCHIVE/EDIT  --}}
-    <div class="mt-3 flex flex-wrap gap-3 lg:gap-8 items-center justify-between">
+    <div class="-mt-8 mb-5">
         <livewire:categories.tag :category="$post->category" />
-
-        @if($post->author->isMyself())
-            <div>
-                @if(! $post->archived_at)
-                    <x-button label="Archive" wire:click="archive" icon="o-archive-box" class="btn-sm btn-ghost" />
-                    <x-button label="Edit" link="/posts/{{ $post->id }}/edit" icon="o-pencil" class="btn-sm btn-ghost" />
-                @else
-                    <x-button label="Unarchive" wire:click="unarchive" icon="o-archive-box" class="btn-sm btn-ghost" />
-                @endif
-            </div>
-        @endif
     </div>
 
-    <hr class="my-5" />
-
     {{--  POST BODY  --}}
-    <x-card class="leading-7 mb-10 border" separator shadow>
+    <x-card class="text-sm/7 mb-10 border border-base-content/10" separator shadow>
         {{--  TITLE --}}
         <x-slot:title class="!text-sm flex gap-2 items-center">
             <x-avatar :image="$post->author->avatar" :title="$post->author->username" />
@@ -54,14 +53,14 @@ new class extends Component {
         </x-slot:title>
 
         {{--   BODY  --}}
-        {!! nl2br($post->body) !!}
+        {!! nl2br(e($post->body)) !!}
     </x-card>
 
     {{--  ARCHIVED WARNING  --}}
     @if($post->archived_at)
         <x-alert title="This post was archived {{ $post->archived_at->diffForHumans() }}" icon="o-archive-box" class="alert-warning mb-10" />
     @endif
-    
+
     {{--  COMMENTS --}}
     <livewire:comments.index :post="$post" lazy wire:key="comments-{{  $post->updated_at }}" />
 </div>

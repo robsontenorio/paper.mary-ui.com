@@ -63,17 +63,17 @@ new class extends Component {
                     <x-slot:trigger>
                         <x-button icon="o-ellipsis-vertical" class="btn-sm btn-ghost btn-circle" />
                     </x-slot:trigger>
-                    <x-menu-item title="Edit" icon="o-pencil" @click="$wire.editing = true" />
+                    <x-menu-item title="Edit" icon="o-pencil-square" @click="$wire.editing = true" />
                     <x-menu-item title="Remove" icon="o-trash" wire:click="delete({{ $comment->id  }})" class="text-error" />
                 </x-dropdown>
             @endif
         </x-slot:menu>
 
         {{-- COMMENT --}}
-        <div class="leading-7">
+        <div class="text-sm/7">
             {{--  BODY  --}}
             <div x-show="!$wire.editing">
-                {!!  nl2br($comment->body) !!}
+                {!! nl2br(e($comment->body)) !!}
             </div>
 
             {{-- EDIT FORM --}}

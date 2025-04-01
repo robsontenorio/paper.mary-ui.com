@@ -1,9 +1,12 @@
-<p align="center"><img width="300" src="public/paper2.png"></p>
-<p align="center"><img width="50" src="public/mary.png"></p>
+<p align="center"><img width="200" src="public/paper.png"></p>
 
 ## Introduction
 
-This is the source code of demo [paper.mary-ui.com](https://paper.mary-ui.com) built with [MaryUI](https://mary-ui.com).
+This is the source code of  [paper.mary-ui.com](https://paper.mary-ui.com) built with [maryUI](https://mary-ui.com).
+
+## All demos
+
+See at https://mary-ui.com/docs/demos.
 
 ## Sponsor
 
@@ -23,16 +26,16 @@ Clone the repository.
 git clone git@github.com:robsontenorio/paper.mary-ui.com.git
 ```
 
-Create `.env` from `.env.example` and adjust few vars.
+Create the `.env` from `.env.example`.
 
 ```bash
-APP_ENV=local
-APP_DEBUG=true
+cp .env .env.example
 ```
 
 Install, migrate and start.
 
 ```bash
+# See `composer.json`
 composer start
 ```
 
