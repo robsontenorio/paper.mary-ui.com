@@ -18,8 +18,6 @@ Let's keep pushing it, [sponsor me](https://github.com/sponsors/robsontenorio) â
 
 ## Install
 
-This demo is made with Laravel, Livewire, Volt and Mary.
-
 Clone the repository.
 
 ```bash
