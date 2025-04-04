@@ -3,9 +3,12 @@ services:
         build:
             context: ..
             dockerfile: .docker/Dockerfile
-            target: local
+            target: base
+        environment:
+            - SERVER_NAME=:8016
+        tty: true
         volumes:
-            - ../:/var/www/app:cached
+            - ../:/app:cached
         ports:
-            - 8016:8080
+            - 8016:8016
             - 5176:5176
