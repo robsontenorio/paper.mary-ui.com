@@ -28,6 +28,9 @@ Create the `.env` from `.env.example`.
 
 ```bash
 cp .env .env.example
+
+# Remember to set the `APP_URL`
+APP_URL=http://...
 ```
 
 Install, migrate and start.
@@ -37,4 +40,4 @@ Install, migrate and start.
 composer start
 ```
 
-**Done! See http://localhost:8016**
+**Done!**

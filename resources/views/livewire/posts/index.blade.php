@@ -73,7 +73,7 @@ new class extends Component {
             </x-slot:prepend>
         </x-input>
 
-        <x-group wire:model.live="sort" :options="$sorts" />
+        <x-group wire:model.live="sort" :options="$sorts" class="[&:checked]:!btn-primary btn-sm" />
     </div>
 
     <x-card class="mt-10 !p-0 sm:!p-2" shadow>
