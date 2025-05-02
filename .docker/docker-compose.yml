@@ -4,11 +4,9 @@ services:
             context: ..
             dockerfile: .docker/Dockerfile
             target: base
-        environment:
-            - SERVER_NAME=:8016
         tty: true
         volumes:
             - ../:/app:cached
         ports:
-            - 8016:8016
+            - 8016:8000
             - 5176:5176

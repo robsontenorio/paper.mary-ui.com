@@ -65,4 +65,4 @@ jobs:
       - name: "Deployment webhook"
         if: success()
         run: |
-          curl -X POST "${{ secrets.DEPLOY_WEBHOOK }}"
+          curl -X POST "${{ secrets.DEPLOYMENT_WEBHOOK }}"

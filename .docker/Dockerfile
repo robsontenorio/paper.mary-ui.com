@@ -1,9 +1,8 @@
 # Base
-FROM robsontenorio/laravel:franken-classic AS base
+FROM robsontenorio/laravel:franken-1.0 AS base
 COPY --chown=appuser:appuser . .
 
 # Production
-FROM base AS deploy
-RUN chmod a+x .docker/deploy.sh
-CMD ["/bin/sh", "-c", ".docker/deploy.sh && start"]
+FROM base AS production
+ENV RUN_DEPLOY=true
 
