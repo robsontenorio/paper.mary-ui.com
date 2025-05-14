@@ -1,6 +1,6 @@
 # Base
-FROM robsontenorio/laravel:franken-1.0 AS base
-COPY --chown=appuser:appuser . .
+FROM robsontenorio/laravel:sideup AS base
+COPY --chown=www-data:www-data . .
 
 # Production
 FROM base AS production
