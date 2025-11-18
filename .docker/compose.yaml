@@ -1,12 +1,13 @@
+name: paper
+
 services:
-    paper:
+    app:
         build:
             context: ..
             dockerfile: .docker/Dockerfile
             target: base
-        tty: true
         volumes:
-            - ../:/app:cached
+            - ../:/var/www/html:cached
         ports:
-            - 8016:8000
-            - 5176:5176
+            - "8016:8080"
+            - "5176:5176"

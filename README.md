@@ -27,7 +27,7 @@ git clone git@github.com:robsontenorio/paper.mary-ui.com.git
 Create the `.env` from `.env.example`.
 
 ```bash
-cp .env .env.example
+cp .env.example .env
 
 # Remember to set the `APP_URL`
 APP_URL=http://...
